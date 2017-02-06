@@ -35,14 +35,6 @@ public class UserEndpoint {
 	@Inject
 	UserFacade userFacade;
 
-	@GET
-	@Path("/user")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getUser() {
-		return Response.status(200)
-				.entity(new User().setEmail("ciaome@flare.it").setPassword("cips").setUsername("ciaone")).build();
-
-	}
 
 	@GET
 	@Path("/users")
@@ -51,19 +43,36 @@ public class UserEndpoint {
 
 		List<UserDTO> users = userFacade.getUsers();
 		log.info("/users");
+
 		return Response.status(200).entity(users).build();
 
+	
 	}
 
 	@GET
-	@Path("/user/{name}")
+	@Path("/user/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response getUser(@PathParam(value = "id") Long id) {
+
+		UserDTO user = userFacade.getUser(id);
+
+		return Response.status(200).entity(user).build();
+
+	}
+
+	
+	
+	
+	@GET
+	@Path("/username/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getUserName(@PathParam(value = "name") String name) {
 
-		UserDTO user = userFacade.getUser(name);
+		List<UserDTO> users = userFacade.getUser(name==null?"":name);
 
-		return Response.status(200).entity(user).build();
+		return Response.status(200).entity(users).build();
 
 	}
 
@@ -89,12 +98,7 @@ public class UserEndpoint {
 
 	}
 
-	@GET
-	@Path("/text")
-	public String getUserText() {
-		return "ciao";
-
-	}																
+																
 
 	@DELETE
 	@Path("/delete/{id}")

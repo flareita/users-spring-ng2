@@ -59,6 +59,7 @@
 			<artifactId>commons-beanutils</artifactId>
 
 		</dependency>
+		
 	</dependencies>
 	<build>
 		<plugins>

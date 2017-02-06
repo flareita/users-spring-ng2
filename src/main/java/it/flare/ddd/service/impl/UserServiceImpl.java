@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
 	}
 	
 	@Override
-	public User findByName(String name){
+	public List<User> findByName(String name){
 		return userRepository.findUserByName(name);
 	}
 
@@ -44,6 +44,12 @@ public class UserServiceImpl implements UserService {
 		//optimistic
 		User u=userRepository.findOne(id);
 		 userRepository.delete(u);
+	}
+
+	@Override
+	public User getUser(Long id) {
+		// TODO Auto-generated method stub
+		return userRepository.findOne(id);
 	}
 	
 }

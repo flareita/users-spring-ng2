@@ -52,10 +52,10 @@ public class UserFacadeImpl implements UserFacade{
 
 
 	@Override
-	public UserDTO getUser(String name) {
+	public List<UserDTO> getUser(String name) {
 		try{
-			return userService.findByName(name).toDTO(new UserDTO());
-		}catch(AppException e){
+			List<User> bos = userService.findByName(name);
+			return bos.stream().map(x->x.toDTO(new UserDTO())).collect(Collectors.toList());	}catch(AppException e){
 			throw (e);
 		}catch (Exception e){
 			throw new SystemException(e);
@@ -68,6 +68,18 @@ public class UserFacadeImpl implements UserFacade{
 	public void deleteUser(Long id) {
 		try{
 			 userService.delete(id);
+		}catch(AppException e){
+			throw (e);
+		}catch (Exception e){
+			throw new SystemException(e);
+		}
+	}
+
+
+	@Override
+	public UserDTO getUser(Long id) {
+		try{
+			 return userService.getUser(id).toDTO(new UserDTO());
 		}catch(AppException e){
 			throw (e);
 		}catch (Exception e){

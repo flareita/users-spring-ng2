@@ -11,9 +11,10 @@ import it.flare.ddd.domain.User;
 public interface UserService {
 
 	public List<User> getUsers();
+	public User  getUser(Long id);
 	
 	public void editUser(User bo);
-	public User findByName(String name);
+	public List<User> findByName(String name);
 	public void delete(Long id);
 	
 }

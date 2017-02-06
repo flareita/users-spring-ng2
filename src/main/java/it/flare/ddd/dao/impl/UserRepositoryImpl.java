@@ -23,18 +23,17 @@ public class UserRepositoryImpl implements UserDAO {
 	UserRepository repo;
 	
 	@Override
-	public User findUserByName(String name) {
+	public List<User> findUserByName(String name) {
 		
 		// TODO Auto-generated method stub
-		TypedQuery<User> q= manager.createQuery("from user u where u.username=:name",User.class).setParameter("name", name);
-		List<User>list= q.getResultList();
-		if(list.size()>1) throw 
-			new AppException(11,"NOT_UNIQ");
-		if(list.isEmpty()) throw 
-		new AppException(10,"USER_NOT_FOUND");
-	
+		TypedQuery<User> q= manager.createQuery("from user u where u.username like :name",User.class).setParameter("name", "%"+name+"%");
+		return  q.getResultList();
+		//if(list.size()>1) throw 
+		//	new AppException(11,"NOT_UNIQ");
+		//if(list.isEmpty()) throw 
+		//new AppException(10,"USER_NOT_FOUND");
 		
-		return list.get(0);
+		
 	}
 
 }

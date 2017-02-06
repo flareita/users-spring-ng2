@@ -10,7 +10,8 @@ import it.flare.ddd.dto.UserDTO;
 public interface UserFacade {
 
 	public List<UserDTO> getUsers();
-	public UserDTO getUser(String name);
+	public UserDTO getUser(Long id);
+	public List<UserDTO> getUser(String name);
 	public void editUser(UserDTO user);
 	
 	public void deleteUser(Long id);
