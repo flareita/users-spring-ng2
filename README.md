@@ -12,4 +12,4 @@ Rest JaxRs with Jersey / Jpa / data / postgreSQL
 
 ## ToDO
 
-add the Angular 2 client  
+add the [Angular 2 client](https://github.com/flareita/users-ng2-spring)  
