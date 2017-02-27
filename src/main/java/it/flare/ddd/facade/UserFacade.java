@@ -12,9 +12,9 @@ public interface UserFacade {
 	public List<UserDTO> getUsers();
 	public UserDTO getUser(Long id);
 	public List<UserDTO> getUser(String name);
-	public void editUser(UserDTO user);
+	public UserDTO editUser(UserDTO user);
 	
-	public void deleteUser(Long id);
+	public Long deleteUser(Long id);
 		
 	
 	

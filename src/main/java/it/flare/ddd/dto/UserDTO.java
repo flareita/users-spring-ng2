@@ -7,7 +7,14 @@ Long id;
 String username;
 String password;
 String email;
+Long serial;
 
+public Long getSerial() {
+	return serial;
+}
+public void setSerial(Long version) {
+	this.serial = version;
+}
 public Long getId() {
 	return id;
 }

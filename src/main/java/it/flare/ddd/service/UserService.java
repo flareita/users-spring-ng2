@@ -13,8 +13,8 @@ public interface UserService {
 	public List<User> getUsers();
 	public User  getUser(Long id);
 	
-	public void editUser(User bo);
+	public User editUser(User bo);
 	public List<User> findByName(String name);
-	public void delete(Long id);
+	public Long delete(Long id);
 	
 }

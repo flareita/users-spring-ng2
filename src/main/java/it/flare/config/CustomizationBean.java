@@ -5,10 +5,10 @@ import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomi
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-@Configuration
-public class CustomizationBean implements EmbeddedServletContainerCustomizer {
-    @Override
-    public void customize(ConfigurableEmbeddedServletContainer container) {
-        container.setContextPath("/demo");
-    }
-}
+//@Configuration
+//public class CustomizationBean implements EmbeddedServletContainerCustomizer {
+//    @Override
+//    public void customize(ConfigurableEmbeddedServletContainer container) {
+//        container.setContextPath("/demo");
+//    }
+//}

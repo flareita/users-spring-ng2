@@ -9,15 +9,20 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import it.flare.Application;
 import it.flare.ddd.dao.UserRepository;
 import it.flare.ddd.domain.User;
 import it.flare.ddd.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService {
+	 static final Logger log = LoggerFactory.getLogger(UserServiceImpl.class);
 
+	
 	@Inject
 	UserRepository userRepository;
 	
@@ -33,17 +38,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public void editUser(User bo) {
+	public User editUser(User bo) {
 		bo.setUpdateTS(new Timestamp(new Date().getTime()));
-		userRepository.saveAndFlush(bo);
+		return  userRepository.saveAndFlush(bo);
+		
 		
 	}
 
 	@Override
-	public void delete(Long id) {
+	public Long delete(Long id) {
 		//optimistic
 		User u=userRepository.findOne(id);
-		 userRepository.delete(u);
+		  userRepository.delete(u);
+		  return id;
 	}
 
 	@Override

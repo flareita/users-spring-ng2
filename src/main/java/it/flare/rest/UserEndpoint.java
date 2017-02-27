@@ -82,8 +82,8 @@ public class UserEndpoint {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response editUser(@PathParam(value = "id") String id, UserDTO payload) {
 
-		userFacade.editUser(payload);
-		return Response.ok().build();
+		UserDTO res=userFacade.editUser(payload);
+		return Response.status(200).entity(res).build();
 
 	}
 
@@ -93,8 +93,8 @@ public class UserEndpoint {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addUser(UserDTO payload) {
 
-		userFacade.editUser(payload);
-		return Response.ok().build();
+		UserDTO res=userFacade.editUser(payload);
+		return Response.status(200).entity(res).build();
 
 	}
 
@@ -102,8 +102,9 @@ public class UserEndpoint {
 
 	@DELETE
 	@Path("/delete/{id}")
-	public void deleteUser(@PathParam(value="id") Long id) {
-		userFacade.deleteUser(id);
+	public Response deleteUser(@PathParam(value="id") Long id) {
+		Long res=userFacade.deleteUser(id);
+		return Response.status(200).entity(res).build();
 
 	}
 	

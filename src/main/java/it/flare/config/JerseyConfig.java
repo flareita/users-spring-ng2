@@ -11,6 +11,7 @@ import it.flare.rest.AppExceptionMapper;
 import it.flare.rest.UserEndpoint;
 
 @Configuration
+@ApplicationPath("/demo")
 	public class JerseyConfig extends ResourceConfig {
 	    public JerseyConfig() {
 	        register(UserEndpoint.class)

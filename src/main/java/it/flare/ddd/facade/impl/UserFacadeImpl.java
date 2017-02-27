@@ -40,9 +40,9 @@ public class UserFacadeImpl implements UserFacade{
 
 	@Override
 	@Transactional(value = TxType.REQUIRED)
-	public void editUser(UserDTO userDTO) {
+	public UserDTO editUser(UserDTO userDTO) {
 		try{
-		userService.editUser(new User().fromDTO(userDTO));
+				 return userService.editUser(new User().fromDTO(userDTO)).toDTO(new UserDTO());
 		}catch(AppException e){
 			throw (e);
 		}catch (Exception e){
@@ -65,9 +65,9 @@ public class UserFacadeImpl implements UserFacade{
 
 	@Override
 	@Transactional(value = TxType.REQUIRED)
-	public void deleteUser(Long id) {
+	public Long deleteUser(Long id) {
 		try{
-			 userService.delete(id);
+			 return userService.delete(id);
 		}catch(AppException e){
 			throw (e);
 		}catch (Exception e){
