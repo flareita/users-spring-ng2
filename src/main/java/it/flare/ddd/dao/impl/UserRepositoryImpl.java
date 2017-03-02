@@ -24,7 +24,6 @@ public class UserRepositoryImpl implements UserDAO {
 	
 	@Override
 	public List<User> findUserByName(String name) {
-		
 		// TODO Auto-generated method stub
 		TypedQuery<User> q= manager.createQuery("from user u where u.username like :name",User.class).setParameter("name", "%"+name+"%");
 		return  q.getResultList();

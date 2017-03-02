@@ -8,7 +8,17 @@ String username;
 String password;
 String email;
 Long serial;
+String country;
 
+
+
+
+public String getCountry() {
+	return country;
+}
+public void setCountry(String country) {
+	this.country = country;
+}
 public Long getSerial() {
 	return serial;
 }

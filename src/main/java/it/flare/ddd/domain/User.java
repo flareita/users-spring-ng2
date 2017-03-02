@@ -27,6 +27,14 @@ public class User extends AbstractDomain<UserDTO,User>{
 	}
 	@Column(nullable=false)
 	String username;
+	@Column(nullable=true)
+	String country;
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
 	@Column(nullable=false)
 	String password;
 	@Column(nullable=true)
