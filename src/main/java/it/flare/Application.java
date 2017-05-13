@@ -11,7 +11,7 @@ public class Application {
 
     
 	public static void main(String[] args) {
-         log.info("let us start");
+      
 		SpringApplication.run(Application.class, args);
         
 	}

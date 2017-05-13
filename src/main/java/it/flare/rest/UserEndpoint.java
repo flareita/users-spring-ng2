@@ -50,7 +50,7 @@ public class UserEndpoint {
 	}
 
 	@GET
-	@Path("/user/{id}")
+	@Path("/users/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getUser(@PathParam(value = "id") Long id) {
@@ -65,7 +65,7 @@ public class UserEndpoint {
 	
 	
 	@GET
-	@Path("/username/{name}")
+	@Path("/usernames/{name}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response getUserName(@PathParam(value = "name") String name) {
@@ -77,7 +77,7 @@ public class UserEndpoint {
 	}
 
 	@PUT
-	@Path("/user/edit/{id}")
+	@Path("/users/{id}")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response editUser(@PathParam(value = "id") String id, UserDTO payload) {
@@ -88,7 +88,7 @@ public class UserEndpoint {
 	}
 
 	@POST
-	@Path("/user/add")
+	@Path("/users")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response addUser(UserDTO payload) {
@@ -101,7 +101,7 @@ public class UserEndpoint {
 																
 
 	@DELETE
-	@Path("/delete/{id}")
+	@Path("/users/{id}")
 	public Response deleteUser(@PathParam(value="id") Long id) {
 		Long res=userFacade.deleteUser(id);
 		return Response.status(200).entity(res).build();
