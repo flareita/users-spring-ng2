@@ -1,5 +1,9 @@
 package it.flare.ddd.facade.impl;
 
+import static java.util.stream.Collectors.toList;
+import static javax.transaction.Transactional.TxType.NOT_SUPPORTED;
+import static javax.transaction.Transactional.TxType.REQUIRED;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -18,76 +22,69 @@ import it.flare.ddd.facade.UserFacade;
 import it.flare.ddd.service.UserService;
 
 @Service
-public class UserFacadeImpl implements UserFacade{
+public class UserFacadeImpl implements UserFacade {
 
 	@Inject
 	UserService userService;
 
-
 	@Override
-	@Transactional(value = TxType.NOT_SUPPORTED)
+	@Transactional(value = NOT_SUPPORTED)
 	public List<UserDTO> getUsers() {
-		try{
-		List<User> bos = userService.getUsers();
-		return bos.stream().map(x->x.toDTO(new UserDTO())).collect(Collectors.toList());
-		}catch(AppException e){
+		try {
+			List<User> bos = userService.getUsers();
+			return bos.stream().map(x -> x.toDTO(new UserDTO())).collect(toList());
+		} catch (AppException e) {
 			throw (e);
-		}catch (Exception e){
-			throw new SystemException(e);
-		}	
-	}
-
-
-	@Override
-	@Transactional(value = TxType.REQUIRED)
-	public UserDTO editUser(UserDTO userDTO) {
-		try{
-				 return userService.editUser(new User().fromDTO(userDTO)).toDTO(new UserDTO());
-		}catch(AppException e){
-			throw (e);
-		}catch (Exception e){
+		} catch (Exception e) {
 			throw new SystemException(e);
 		}
 	}
 
+	@Override
+	@Transactional(value = REQUIRED)
+	public UserDTO editUser(UserDTO userDTO) {
+		try {
+			return userService.editUser(new User().fromDTO(userDTO)).toDTO(new UserDTO());
+		} catch (AppException e) {
+			throw (e);
+		} catch (Exception e) {
+			throw new SystemException(e);
+		}
+	}
 
 	@Override
 	public List<UserDTO> getUser(String name) {
-		try{
+		try {
 			List<User> bos = userService.findByName(name);
-			return bos.stream().map(x->x.toDTO(new UserDTO())).collect(Collectors.toList());	}catch(AppException e){
+			return bos.stream().map(x -> x.toDTO(new UserDTO())).collect(toList());
+		} catch (AppException e) {
 			throw (e);
-		}catch (Exception e){
+		} catch (Exception e) {
 			throw new SystemException(e);
 		}
 	}
-
 
 	@Override
-	@Transactional(value = TxType.REQUIRED)
+	@Transactional(value = REQUIRED)
 	public Long deleteUser(Long id) {
-		try{
-			 return userService.delete(id);
-		}catch(AppException e){
+		try {
+			return userService.delete(id);
+		} catch (AppException e) {
 			throw (e);
-		}catch (Exception e){
+		} catch (Exception e) {
 			throw new SystemException(e);
 		}
 	}
-
 
 	@Override
 	public UserDTO getUser(Long id) {
-		try{
-			 return userService.getUser(id).toDTO(new UserDTO());
-		}catch(AppException e){
+		try {
+			return userService.getUser(id).toDTO(new UserDTO());
+		} catch (AppException e) {
 			throw (e);
-		}catch (Exception e){
+		} catch (Exception e) {
 			throw new SystemException(e);
 		}
 	}
-
-
-
 
 }

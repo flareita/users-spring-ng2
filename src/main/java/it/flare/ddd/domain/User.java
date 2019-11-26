@@ -14,7 +14,7 @@ import it.flare.ddd.dto.UserDTO;
 public class User extends AbstractDomain<UserDTO,User>{
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)  
+	@GeneratedValue(strategy=GenerationType.IDENTITY)  
 	Long id;
 	
 	

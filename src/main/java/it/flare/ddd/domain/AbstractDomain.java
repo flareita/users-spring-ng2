@@ -1,5 +1,7 @@
 package it.flare.ddd.domain;
 
+import static org.springframework.beans.BeanUtils.copyProperties;
+
 import java.io.Serializable;
 import java.sql.Timestamp;
 
@@ -14,33 +16,32 @@ import javax.persistence.Version;
 import org.springframework.beans.BeanUtils;
 
 @MappedSuperclass
-public abstract class AbstractDomain<T,D> implements Serializable{
+public abstract class AbstractDomain<T, D> implements Serializable {
 
-	
 	private static final long serialVersionUID = 132423L;
 
 //in a real app use an external mapper
-	
-	public <D> D fromDTO(T t){
-		BeanUtils.copyProperties(t, this);
-		return (D)this;
+
+	@SuppressWarnings({ "hiding", "unchecked" })
+	public <D> D fromDTO(T t) {
+		copyProperties(t, this);
+		return (D) this;
 	}
 
-	public T toDTO(T t){
-		BeanUtils.copyProperties(this,t);
+	public T toDTO(T t) {
+		copyProperties(this, t);
 		return t;
 	}
 
 	@Column(insertable = true, updatable = false)
 	private Timestamp createTS;
 	@Column()
-	private Timestamp updateTS; 
+	private Timestamp updateTS;
 
 	@Version
-	@Column(name="version", columnDefinition = "integer DEFAULT 0", nullable = false)
-	private Long serial=0L;
-	
-	
+	@Column(name = "version", columnDefinition = "integer DEFAULT 0", nullable = false)
+	private Long serial = 0L;
+
 	public Long getSerial() {
 		return serial;
 	}
@@ -65,12 +66,10 @@ public abstract class AbstractDomain<T,D> implements Serializable{
 		this.updateTS = updateTS;
 	}
 
-
 	@PrePersist
 	void onCreate() {
 		this.setCreateTS(new java.sql.Timestamp(new java.util.Date().getTime()));
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -103,9 +102,4 @@ public abstract class AbstractDomain<T,D> implements Serializable{
 		return true;
 	}
 
-
-
-
 }
-
-
